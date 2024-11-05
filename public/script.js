@@ -12,7 +12,7 @@ async function generateQuestion() {
         console.error("API Key not loaded.");
         return;
     }
-    
+
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
             method: 'POST',
