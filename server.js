@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -9,7 +8,12 @@ app.use(express.static('public'));
 
 // Endpoint to provide the API key securely
 app.get('/api-key', (req, res) => {
-    res.json({ key: process.env.OPENAI_API_KEY });
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (apiKey) {
+        res.json({ key: apiKey });
+    } else {
+        res.status(500).send("API key not configured");
+    }
 });
 
 app.listen(port, () => {
